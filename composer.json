@@ -1,0 +1,27 @@
+{
+    "name": "mitchbaylis/postmark-kit",
+    "description": "Shared Postmark mail for the mitch-baylis apps: runtime mailer, system notification mailable and bounce/complaint suppression.",
+    "type": "library",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0 || ^12.0",
+        "illuminate/mail": "^11.0 || ^12.0",
+        "illuminate/routing": "^11.0 || ^12.0",
+        "illuminate/database": "^11.0 || ^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MitchBaylis\\PostmarkKit\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MitchBaylis\\PostmarkKit\\PostmarkKitServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
