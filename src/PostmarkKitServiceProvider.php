@@ -6,6 +6,7 @@ use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use MitchBaylis\PostmarkKit\Console\TestCommand;
 use MitchBaylis\PostmarkKit\Http\PostmarkWebhookController;
 use MitchBaylis\PostmarkKit\Suppression\SuppressionGuard;
 use MitchBaylis\PostmarkKit\Suppression\SuppressionList;
@@ -35,6 +36,10 @@ class PostmarkKitServiceProvider extends ServiceProvider
 
         $this->registerWebhookRoute();
         $this->registerSuppressionGuard();
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([TestCommand::class]);
+        }
     }
 
     private function registerWebhookRoute(): void

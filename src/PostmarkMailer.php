@@ -81,7 +81,7 @@ final class PostmarkMailer
 
         config(['mail.mailers.postmark' => $config]);
 
-        Mail::purge('postmark');
+        $this->purge();
     }
 
     private function restore(): void
@@ -93,6 +93,20 @@ final class PostmarkMailer
         config(['mail.mailers.postmark' => $this->original]);
         $this->original = null;
 
-        Mail::purge('postmark');
+        $this->purge();
+    }
+
+    /**
+     * Drop the resolved mailer so the next send rebuilds it from config.
+     *
+     * Guarded because `Mail::fake()` swaps in a fake with no purge surface.
+     */
+    private function purge(): void
+    {
+        $manager = Mail::getFacadeRoot();
+
+        if (method_exists($manager, 'purge')) {
+            $manager->purge('postmark');
+        }
     }
 }
