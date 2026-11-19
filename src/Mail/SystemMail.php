@@ -19,7 +19,7 @@ final class SystemMail extends NotificationMailable
      * @param  array<int, string>  $lines
      */
     public function __construct(
-        private readonly string $mailSubject,
+        private readonly string $subjectLine,
         private readonly string $mailHeading,
         private readonly array $lines = [],
         private readonly ?string $actionUrl = null,
@@ -41,9 +41,9 @@ final class SystemMail extends NotificationMailable
         return new self($subject, $heading, $lines, $actionUrl, $actionLabel, $footer);
     }
 
-    protected function subject(): string
+    protected function mailSubject(): string
     {
-        return $this->mailSubject;
+        return $this->subjectLine;
     }
 
     /**

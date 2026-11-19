@@ -19,7 +19,7 @@ abstract class NotificationMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    abstract protected function subject(): string;
+    abstract protected function mailSubject(): string;
 
     /**
      * The default sender, from `config('postmark.from')`.
@@ -55,7 +55,7 @@ abstract class NotificationMailable extends Mailable
     {
         return new Envelope(
             from: $this->sender(),
-            subject: $this->subject(),
+            subject: $this->mailSubject(),
         );
     }
 
