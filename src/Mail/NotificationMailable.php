@@ -38,7 +38,7 @@ abstract class NotificationMailable extends Mailable
         return new Address($address, $name);
     }
 
-    protected function view(): string
+    protected function contentView(): string
     {
         return 'postmark-kit::mail.notification';
     }
@@ -62,7 +62,7 @@ abstract class NotificationMailable extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: $this->view(),
+            view: $this->contentView(),
             with: array_merge([
                 'appName' => (string) config('app.name'),
             ], $this->mailData()),
